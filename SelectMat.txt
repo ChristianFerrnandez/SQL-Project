@@ -1,0 +1,12 @@
+SELECT m.wording, m.coef * 100 / (SELECT sum(coef) FROM Matter ) AS Percentage
+FROM Notation n
+			LEFT JOIN Test t ON t.numtest = n.numtest
+			LEFT JOIN Matter m on t.codemat = m.codemat
+GROUP BY n.numtest;
+
+
+SELECT m.wording, sum(distinct m.coef ) AS 'Sum of coefficient'
+	FROM Notation n
+			LEFT JOIN Test t ON t.numtest = n.numtest
+			LEFT JOIN Matter m on t.codemat = m.codemat
+;

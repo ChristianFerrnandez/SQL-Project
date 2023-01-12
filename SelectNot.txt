@@ -1,0 +1,93 @@
+SELECT count(t.numtest) 
+FROM Test t;
+
+
+
+SELECT n.score, s.name, s.firstname
+	FROM Notation n
+    LEFT JOIN Student s ON s.numstud = n.numstud;
+
+
+
+SELECT n.score, s.name, s.firstname, m.wording
+	FROM Student s
+		LEFT JOIN Notation n ON s.numstud = n.numstud
+		LEFT JOIN Test t ON t.numtest = n.numtest
+		LEFT JOIN Matter m on t.codemat = m.codemat;
+
+
+
+SELECT n.score 
+	FROM Notation n WHERE score >= 10;
+
+
+
+
+SELECT s.name, s.firstname
+	FROM Student s
+		LEFT JOIN Notation n ON n.numstud = s.numstud
+		WHERE score >=20;
+
+
+
+SELECT s.name, s.firstname, avg(n.score) As 'Average Score'
+	FROM Student s
+		LEFT JOIN Notation n ON n.numstud = s.numstud
+	GROUP BY s.name, s.firstname;
+
+
+
+
+SELECT t.numtest
+	FROM Test t
+		WHERE t.testdate BETWEEN '2014/01/01' AND '2014/06/30';
+
+
+
+
+
+SELECT t.numtest, t.testdate, t.place, m.codemat, m. wording
+	FROM Test t
+		LEFT JOIN Matter m ON m.codemat = t.codemat;
+
+
+
+
+
+SELECT s.name, s.firstname, avg(n.score)
+	FROM Student s 
+		LEFT JOIN Notation n ON n.numstud = s.numstud
+	GROUP BY s.name, s.firstname
+	HAVING avg(n.score)
+	ORDER BY avg(n.score) DESC;
+
+
+
+SELECT avg(score), n.numtest, m.wording
+FROM Notation n
+			LEFT JOIN Test t ON t.numtest = n.numtest
+			LEFT JOIN Matter m on t.codemat = m.codemat
+GROUP BY n.numtest
+HAVING count(t.numtest)  > 1;
+
+
+
+
+SELECT avg(n.score) AS 'AVG Score', t.numtest
+		FROM Notation n 
+		LEFT JOIN Test t ON t.numtest = n.numtest
+        GROUP BY t.numtest
+        HAVING count(t.numtest) < 6;
+
+
+
+
+
+
+
+
+
+
+
+	
+	

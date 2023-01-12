@@ -1,0 +1,32 @@
+CREATE TABLE IF NOT EXISTS Student (
+	numstud INT PRIMARY KEY,
+	name CHAR(25),
+	firsname CHAR(25),
+	dateofbirth Date,
+	street CHAR(25),
+	postalcod CHAR(25),
+	city CHAR(25)
+);
+
+CREATE TABLE IF NOT EXISTS Matter (
+	codemat CHAR (25) PRIMARY KEY,
+	wording CHAR (25),
+	coef FLOAT
+);
+
+CREATE TABLE IF NOT EXISTS Test (
+	numtest INT PRIMARY KEY,
+	testdate Date,
+	place CHAR(25),
+	codemat CHAR (25),
+	FOREIGN KEY (codemat) REFERENCES Matter (codemat)
+);
+
+CREATE TABLE IF NOT EXISTS Notation (
+	score FLOAT,
+	numstud INT,
+	numtest INT,
+	PRIMARY KEY (numstud, numtest),
+	FOREIGN KEY(numstud) REFERENCES Student (numstud),
+	FOREIGN KEY(numtest) REFERENCES Test (numtest)
+ );
